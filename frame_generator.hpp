@@ -25,26 +25,34 @@
 #include <thread>
 #include <random>
 
-class FrameGenerator {
+class FrameGenerator
+{
 
-    public:
-        FrameGenerator() = default;
-        void init(std::unordered_map<std::string, std::string> &configParam);
-        void generate_frame(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &time, frame &curr_frame);
-        double get_size_esperance();
+public:
+  FrameGenerator () = default;
+  void init (std::unordered_map<std::string, std::string> &configParam);
+  void generate_frame (std::chrono::time_point<std::chrono::steady_clock,
+					       std::chrono::nanoseconds> &time,
+		       frame &curr_frame);
+  double get_size_esperance ();
 
-    private:
-        unsigned long max_frame_size;
-        unsigned long max_num_queue;
-        unsigned long long id_count = 0;
-        std::map<int, float> class_repartition_map;
-        std::map<int, float> size_repartition_map;
-        std::vector<float> class_repartition_vec;
-        std::vector<float> size_repartition_vec;
+private:
+  unsigned long max_frame_size;
+  unsigned long max_num_queue;
+  unsigned long long id_count = 0;
+  std::map<int, float> class_repartition_map;
+  std::map<int, float> size_repartition_map;
+  std::vector<float> class_repartition_vec;
+  std::vector<float> size_repartition_vec;
 
-        void generate_packet(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &time, frame &curr_frame);
-        std::vector<float> generate_distribution_vector(std::map<int, float> repartition_map, unsigned int max_size);
+  void
+  generate_packet (std::chrono::time_point<std::chrono::steady_clock,
+					   std::chrono::nanoseconds> &time,
+		   frame &curr_frame);
+  std::vector<float>
+  generate_distribution_vector (std::map<int, float> repartition_map,
+				unsigned int max_size);
 
-        std::discrete_distribution<> class_d;
-        std::discrete_distribution<> size_d;
+  std::discrete_distribution<> class_d;
+  std::discrete_distribution<> size_d;
 };

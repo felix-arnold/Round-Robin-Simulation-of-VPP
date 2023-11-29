@@ -13,37 +13,58 @@
 
 #include "packet.hpp"
 
-Packet::Packet(unsigned long long pkt_id, unsigned int pkt_class, unsigned int pkt_size, std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &timestamp) {
-    this->pkt_id = pkt_id;
-    this->pkt_class = pkt_class;
-    this->pkt_size = pkt_size;
-    this->pkt_in_timestamp = timestamp;
+Packet::Packet (unsigned long long pkt_id, unsigned int pkt_class,
+		unsigned int pkt_size,
+		std::chrono::time_point<std::chrono::steady_clock,
+					std::chrono::nanoseconds> &timestamp)
+{
+  this->pkt_id = pkt_id;
+  this->pkt_class = pkt_class;
+  this->pkt_size = pkt_size;
+  this->pkt_in_timestamp = timestamp;
 }
 
-int Packet::get_pkt_id() {
-    return pkt_id;
+int
+Packet::get_pkt_id ()
+{
+  return pkt_id;
 }
 
-int Packet::get_pkt_class() {
-    return pkt_class;
+int
+Packet::get_pkt_class ()
+{
+  return pkt_class;
 }
 
-int Packet::get_pkt_size() {
-    return pkt_size;
+int
+Packet::get_pkt_size ()
+{
+  return pkt_size;
 }
 
-std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> Packet::get_pkt_in_timestamp() {
-    return pkt_in_timestamp;
+std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+Packet::get_pkt_in_timestamp ()
+{
+  return pkt_in_timestamp;
 }
 
-std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> Packet::get_pkt_out_timestamp() {
-    return pkt_out_timestamp;
+std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+Packet::get_pkt_out_timestamp ()
+{
+  return pkt_out_timestamp;
 }
 
-void Packet::set_pkt_out_timestamp(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> timestamp) {
-    this->pkt_out_timestamp = timestamp;
+void
+Packet::set_pkt_out_timestamp (
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+    timestamp)
+{
+  this->pkt_out_timestamp = timestamp;
 }
 
-bool Packet::comparePtrClass(std::shared_ptr<Packet> pkt1, std::shared_ptr<Packet> pkt2) {
-    return pkt1->get_pkt_class() < pkt2->get_pkt_class();
+bool
+Packet::comparePtrClass (std::shared_ptr<Packet> pkt1,
+			 std::shared_ptr<Packet> pkt2)
+{
+  return pkt1->get_pkt_class () < pkt2->get_pkt_class ();
 }

@@ -22,30 +22,36 @@
 #include "utility"
 #include <cmath>
 
-class Scheduler {
+class Scheduler
+{
 
-    public:
-        Scheduler() = default;
-        void init(std::unordered_map<std::string, std::string> &configParam);
-        void enqueue(frame &curr_frame);
-        std::shared_ptr<Packet> select_packet();
-        void forward_packet(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &time);
-        bool is_active();
-        void change_active();
+public:
+  Scheduler () = default;
+  void init (std::unordered_map<std::string, std::string> &configParam);
+  void enqueue (frame &curr_frame);
+  std::shared_ptr<Packet> select_packet ();
+  void
+  forward_packet (std::chrono::time_point<std::chrono::steady_clock,
+					  std::chrono::nanoseconds> &time);
+  bool is_active ();
+  void change_active ();
 
-        void enqueue_simpl(frame &curr_frame);
-        std::shared_ptr<Packet> select_packet_simpl();
-        void forward_packet_simpl(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &time);
-        bool is_active_simpl();
-        void change_active_simpl();
+  void enqueue_simpl (frame &curr_frame);
+  std::shared_ptr<Packet> select_packet_simpl ();
+  void forward_packet_simpl (
+    std::chrono::time_point<std::chrono::steady_clock,
+			    std::chrono::nanoseconds> &time);
+  bool is_active_simpl ();
+  void change_active_simpl ();
 
-    private:
-        unsigned long max_num_queue;
-        unsigned long max_nic_size;
-        std::unordered_map<unsigned int, std::queue<std::shared_ptr<Packet>>> pkt_map = {};
-        std::shared_ptr<Packet> next_pkt, next_pkt_simpl;
-        unsigned long num_pkt = 0, num_pkt_simpl = 0;
-        bool active = false, active_simpl = false;
-        std::queue<std::shared_ptr<Packet>> pkt_queue_simpl = {};
-        std::queue<frame> frame_queue = {};
+private:
+  unsigned long max_num_queue;
+  unsigned long max_nic_size;
+  std::unordered_map<unsigned int, std::queue<std::shared_ptr<Packet> > >
+    pkt_map = {};
+  std::shared_ptr<Packet> next_pkt, next_pkt_simpl;
+  unsigned long num_pkt = 0, num_pkt_simpl = 0;
+  bool active = false, active_simpl = false;
+  std::queue<std::shared_ptr<Packet> > pkt_queue_simpl = {};
+  std::queue<frame> frame_queue = {};
 };

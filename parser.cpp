@@ -14,50 +14,59 @@
 #include "parser.hpp"
 #include <iostream>
 
-std::unordered_map<std::string, std::string> Parser::readConfigFile(std::string fileName) {
+std::unordered_map<std::string, std::string>
+Parser::readConfigFile (std::string fileName)
+{
 
-    std::string config, temp;
-    std::ifstream fileStream(fileName);
-    if (fileStream.is_open()) {
-        while (getline(fileStream, temp))
-            config+="\n"+temp;
+  std::string config, temp;
+  std::ifstream fileStream (fileName);
+  if (fileStream.is_open ())
+    {
+      while (getline (fileStream, temp))
+	config += "\n" + temp;
     }
-    fileStream.close();
-    return parseConfigFile(config);
+  fileStream.close ();
+  return parseConfigFile (config);
 }
 
-std::unordered_map<std::string, std::string> Parser::parseConfigFile(std::string configInfo) {
+std::unordered_map<std::string, std::string>
+Parser::parseConfigFile (std::string configInfo)
+{
 
-    std::stringstream cfgFile(configInfo);
-    std::string line;
-    std::unordered_map<std::string, std::string> config = {};
+  std::stringstream cfgFile (configInfo);
+  std::string line;
+  std::unordered_map<std::string, std::string> config = {};
 
-    while (std::getline(cfgFile, line)) {
-        std::istringstream is_line(line);
-        std::string key;
-        if (std::getline(is_line, key, '=')) {
-            std::string value;
-            if (std::getline(is_line, value))
-            config.emplace(key, value);
-        }
+  while (std::getline (cfgFile, line))
+    {
+      std::istringstream is_line (line);
+      std::string key;
+      if (std::getline (is_line, key, '='))
+	{
+	  std::string value;
+	  if (std::getline (is_line, value))
+	    config.emplace (key, value);
+	}
     }
 
-    return config;
+  return config;
 }
 
+std::map<int, float>
+Parser::parsePairArray (std::string string)
+{
 
-std::map<int, float> Parser::parsePairArray(std::string string) {
+  std::stringstream stream_array (string);
+  std::string s_pair;
+  std::map<int, float> pair_array_map = {};
 
-    std::stringstream stream_array(string);
-    std::string s_pair;
-    std::map<int, float> pair_array_map = {};
-
-    while (std::getline(stream_array, s_pair, '|') && s_pair != "0") {
-        std::stringstream stream_pair(s_pair);
-        std::string s_class, s_value;
-        std::getline(stream_pair, s_class, ',');
-        std::getline(stream_pair, s_value, ',');
-        pair_array_map.emplace(stod(s_class), stod(s_value));
+  while (std::getline (stream_array, s_pair, '|') && s_pair != "0")
+    {
+      std::stringstream stream_pair (s_pair);
+      std::string s_class, s_value;
+      std::getline (stream_pair, s_class, ',');
+      std::getline (stream_pair, s_value, ',');
+      pair_array_map.emplace (stod (s_class), stod (s_value));
     }
-    return pair_array_map;
+  return pair_array_map;
 }

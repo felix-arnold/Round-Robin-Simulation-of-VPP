@@ -14,27 +14,33 @@
 #include <string>
 #include <chrono>
 
-enum event_type {
-    FRAME_ARRIVING = 0,
-    TRANS_START_TRUE = 1,
-    TRANS_START_SIMPL = 2,
-    TRANS_END_TRUE = 3,
-    TRANS_END_SIMPL = 4,
-    SAVE_DATA = 5
+enum event_type
+{
+  FRAME_ARRIVING = 0,
+  TRANS_START_TRUE = 1,
+  TRANS_START_SIMPL = 2,
+  TRANS_END_TRUE = 3,
+  TRANS_END_SIMPL = 4,
+  SAVE_DATA = 5
 };
 
-class Event {
+class Event
+{
 
-    public:
-        Event(event_type type, std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> timestamp);
-        static bool compare_event(Event event1, Event event2);
-        const event_type get_type() const;
-        const std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> get_timestamp() const;
+public:
+  Event (event_type type, std::chrono::time_point<std::chrono::steady_clock,
+						  std::chrono::nanoseconds>
+			    timestamp);
+  static bool compare_event (Event event1, Event event2);
+  const event_type get_type () const;
+  const std::chrono::time_point<std::chrono::steady_clock,
+				std::chrono::nanoseconds>
+  get_timestamp () const;
 
-        friend bool operator > (const Event& e1, const Event& e2);
+  friend bool operator> (const Event &e1, const Event &e2);
 
-    private:
-        event_type type;
-        std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> timestamp;
-
+private:
+  event_type type;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+    timestamp;
 };

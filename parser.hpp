@@ -19,10 +19,13 @@
 #include <unordered_map>
 #include <fstream>
 
-class Parser {
+class Parser
+{
 
-    public:
-        static std::unordered_map<std::string, std::string> readConfigFile(std::string fileName);
-        static std::unordered_map<std::string, std::string> parseConfigFile(std::string config);
-        static std::map<int, float> parsePairArray(std::string);
+public:
+  static std::unordered_map<std::string, std::string>
+  readConfigFile (std::string fileName);
+  static std::unordered_map<std::string, std::string>
+  parseConfigFile (std::string config);
+  static std::map<int, float> parsePairArray (std::string);
 };

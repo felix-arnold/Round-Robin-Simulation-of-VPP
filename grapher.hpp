@@ -21,26 +21,33 @@
 #include <iostream>
 #include <fstream>
 
-class Grapher {
+class Grapher
+{
 
-    public:
-        Grapher() = default;
-        void init(std::unordered_map<std::string, std::string> &configParam);
-        void add_packet_true(std::shared_ptr<Packet> &pkt);
-        void add_packet_simpl(std::shared_ptr<Packet> &pkt);
-        void save_data(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> time,
-                       std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> ini_time);
-        void write_to_file(std::string file_name, std::map<unsigned int, double> &map, bool first_call, long time);
+public:
+  Grapher () = default;
+  void init (std::unordered_map<std::string, std::string> &configParam);
+  void add_packet_true (std::shared_ptr<Packet> &pkt);
+  void add_packet_simpl (std::shared_ptr<Packet> &pkt);
+  void save_data (std::chrono::time_point<std::chrono::steady_clock,
+					  std::chrono::nanoseconds>
+		    time,
+		  std::chrono::time_point<std::chrono::steady_clock,
+					  std::chrono::nanoseconds>
+		    ini_time);
+  void write_to_file (std::string file_name,
+		      std::map<unsigned int, double> &map, bool first_call,
+		      long time);
 
-    private:
-        std::map<int, float> class_repartition_map;
-        std::map<unsigned int, double> bandwidth_per_class_true = {};
-        std::map<unsigned int, double> bandwidth_per_class_simpl = {};
-        std::map<unsigned int, double> jitter_per_class_true = {};
-        std::map<unsigned int, double> jitter_per_class_simpl = {};
-        std::map<unsigned int, double> latency_per_class_true = {};
-        std::map<unsigned int, double> latency_per_class_simpl = {};
-        std::map<unsigned int, int> num_per_class_true = {};
-        std::map<unsigned int, int> num_per_class_simpl = {};
-        unsigned long max_num_queue;
+private:
+  std::map<int, float> class_repartition_map;
+  std::map<unsigned int, double> bandwidth_per_class_true = {};
+  std::map<unsigned int, double> bandwidth_per_class_simpl = {};
+  std::map<unsigned int, double> jitter_per_class_true = {};
+  std::map<unsigned int, double> jitter_per_class_simpl = {};
+  std::map<unsigned int, double> latency_per_class_true = {};
+  std::map<unsigned int, double> latency_per_class_simpl = {};
+  std::map<unsigned int, int> num_per_class_true = {};
+  std::map<unsigned int, int> num_per_class_simpl = {};
+  unsigned long max_num_queue;
 };

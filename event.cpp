@@ -13,19 +13,30 @@
 
 #include "event.hpp"
 
-Event::Event(event_type type, std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> timestamp) {
-    this->type = type;
-    this->timestamp = timestamp;
+Event::Event (
+  event_type type,
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+    timestamp)
+{
+  this->type = type;
+  this->timestamp = timestamp;
 }
 
-const event_type Event::get_type() const {
-    return type;
+const event_type
+Event::get_type () const
+{
+  return type;
 }
 
-const std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> Event::get_timestamp() const {
-    return timestamp;
+const std::chrono::time_point<std::chrono::steady_clock,
+			      std::chrono::nanoseconds>
+Event::get_timestamp () const
+{
+  return timestamp;
 }
 
-bool operator > (const Event& e1, const Event& e2) {
-    return e1.timestamp > e2.timestamp;
+bool
+operator> (const Event &e1, const Event &e2)
+{
+  return e1.timestamp > e2.timestamp;
 }

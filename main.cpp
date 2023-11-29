@@ -16,12 +16,15 @@
 #include <unordered_map>
 #include <string>
 
-int main(int argc,char* argv[]) {
+int
+main (int argc, char *argv[])
+{
 
-    std::unordered_map<std::string, std::string> configParam = Parser::readConfigFile("../config.cfg");
+  std::unordered_map<std::string, std::string> configParam =
+    Parser::readConfigFile ("../config.cfg");
 
-    EventHandler eh(configParam);
-    eh.run();
+  EventHandler eh (configParam);
+  eh.run ();
 
-    return 0;
+  return 0;
 }

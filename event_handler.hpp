@@ -21,28 +21,32 @@
 #include "parser.hpp"
 #include <chrono>
 
-class EventHandler {
+class EventHandler
+{
 
-    public:
-        EventHandler(std::unordered_map<std::string, std::string> &configParam);
-        void run();
+public:
+  EventHandler (std::unordered_map<std::string, std::string> &configParam);
+  void run ();
 
-    private:
-        std::unordered_map<std::string, std::string> configParam;
+private:
+  std::unordered_map<std::string, std::string> configParam;
 
-        std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> curr_time;
-        std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> ini_time;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+    curr_time;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>
+    ini_time;
 
-        unsigned long max_frame_size;
-        unsigned long output_rate;
+  unsigned long max_frame_size;
+  unsigned long output_rate;
 
-        std::priority_queue<Event, std::vector<Event>, std::greater<Event>> priority_queue;
-        frame curr_frame = {};
-        std::shared_ptr<Packet> next_packet, next_packet_simpl;
+  std::priority_queue<Event, std::vector<Event>, std::greater<Event> >
+    priority_queue;
+  frame curr_frame = {};
+  std::shared_ptr<Packet> next_packet, next_packet_simpl;
 
-        FrameGenerator frame_generator;
-        Scheduler sched;
-        Grapher grapher;
+  FrameGenerator frame_generator;
+  Scheduler sched;
+  Grapher grapher;
 
-        std::chrono::system_clock::time_point start;
+  std::chrono::system_clock::time_point start;
 };
